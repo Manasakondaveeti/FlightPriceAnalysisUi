@@ -1,3 +1,10 @@
 .mat-table {
     width: 100%;
    }
+
+
+.mat-header-cell, .mat-cell { padding: 8px; text-align: center; } 
+.mat-header-row { background-color: #f1f1f1; } 
+.button { margin-top: 20px;
+    display: flex;
+    justify-content: center; } 

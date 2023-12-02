@@ -1,0 +1,22 @@
+h1 {
+    color: #ff0000; /* Red color for the title */
+  }
+  
+  mat-dialog-content {
+    font-size: 18px;
+  }
+  
+  mat-dialog-actions {
+    justify-content: flex-end;
+  }
+  
+  /* Optional: Add some padding and margin for a cleaner look */
+  mat-dialog-content, mat-dialog-actions {
+    padding: 10px;
+  }
+  
+  button {
+    background-color: #ff0000; /* Red color for the Close button */
+    color: #ffffff; /* White text color for the button */
+  }
+  

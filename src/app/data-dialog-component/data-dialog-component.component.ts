@@ -23,6 +23,7 @@ export class DataDialogComponentComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
  ) {
     this.dataSource.data = data.data;
+    
  }
 
  onNoClick(): void {

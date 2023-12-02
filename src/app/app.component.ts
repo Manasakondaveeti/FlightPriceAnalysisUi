@@ -4,10 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { MatDialog } from '@angular/material/dialog';
 import { DataDialogComponentComponent } from './data-dialog-component/data-dialog-component.component';
+import { ErroDialogComponent } from './erro-dialog/erro-dialog.component';
+
 
 
 
@@ -27,6 +29,7 @@ import { DataDialogComponentComponent } from './data-dialog-component/data-dialo
 export class AppComponent {
   title = 'FlightPriceAnalysisUi';
   data:any;
+  error:any;
 
   flightDetailsEntered=
   {
@@ -60,15 +63,34 @@ export class AppComponent {
     // Call your API to authenticate the user
     // For example:
     this.http.post('http://localhost:8080/api/submissionform/submit', this.flightDetailsEntered).pipe(
+      
       map(data => {
         this.data=data;
         console.log(data);
         this.openDialog();
        // return data;
-     })
+     }),
+     catchError(errResp=>
+      {this.error=errResp.error;
+        console.log(this.error);
+        this.openErrorDialog(this.error);
+        return this.error;
+      }
+    ),
     ).subscribe();
   }
+  
 
+  openErrorDialog(message: string): void {
+    const dialogRef = this.dialog.open(ErroDialogComponent, {
+      width: '250px',
+      data: { message: message }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The error dialog was closed');
+    });
+  }
 
   openDialog(): void {
 

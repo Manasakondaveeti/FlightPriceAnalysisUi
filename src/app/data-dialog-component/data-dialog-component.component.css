@@ -1,10 +1,36 @@
-.mat-table {
+.dialog-title {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .mat-table {
     width: 100%;
-   }
-
-
-.mat-header-cell, .mat-cell { padding: 8px; text-align: center; } 
-.mat-header-row { background-color: #f1f1f1; } 
-.button { margin-top: 20px;
-    display: flex;
-    justify-content: center; } 
+    margin-bottom: 20px;
+  }
+  
+  .table-header {
+    background-color: #3498db; /* Header background color */
+    color: #fff; /* Header text color */
+  }
+  
+  .table-cell {
+    text-align: center;
+  }
+  
+  .close-button {
+    margin-top: 10px;
+    background-color: #e74c3c; /* Red color for close button */
+    color: #fff; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+  
+    /* Add hover effect */
+    &:hover {
+      background-color: #c0392b; /* Darker red on hover */
+    }
+  }
+  
+  

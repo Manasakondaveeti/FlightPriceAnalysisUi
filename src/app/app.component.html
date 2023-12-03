@@ -5,7 +5,7 @@
         <label for="from">From</label>
         <div class="input-group">
           <input type="text" id="from" name="from" [(ngModel)]="flightDetailsEntered.source" (ngModelChange)="onInputChange()" required>
-          <button (click)="wordcheck()" class="spell-check-btn">Spell Check</button>
+          <button (click)="wordcheck(flightDetailsEntered.source)" class="spell-check-btn">Spell Check</button>
           
         </div>
         <div *ngIf="apiResultSource">
@@ -15,7 +15,10 @@
   
       <div class="input-field">
         <label for="destination">Destination</label>
+        <div class="input-group">
         <input type="text" id="destination" name="destination" [(ngModel)]="flightDetailsEntered.destination" (ngModelChange)="onInputChange()" required>
+        <button (click)="wordcheck(flightDetailsEntered.destination)" class="spell-check-btn">Spell Check</button>
+          </div>
         <div *ngIf="apiResultDestination">
             <p>Suggestions: {{ apiResultDestination }}</p>
         </div> 
@@ -29,12 +32,22 @@
       <div class="input-field">
         <label for="date">Date</label>
         <input type="date" id="date" name="date" [(ngModel)]="flightDetailsEntered.date" required>
+
+        
       </div>
   
       <div class="input-field">
         <label for="classtype">Economy or Premium Economy</label>
         <input type="text" id="classtype" name="classtype" [(ngModel)]="flightDetailsEntered.classtype" required>
       </div>
+
+      <!-- Your Angular component template -->
+<div *ngIf="cache">
+    <label>
+    <input type="checkbox" [(ngModel)]="flightDetailsEntered.webcrawl" /> Web Crawl
+    </label>
+  </div>
+  
   
       <div class="submit-btn">
         <button type="submit" (click)="onSubmit(form)">Submit Form</button>

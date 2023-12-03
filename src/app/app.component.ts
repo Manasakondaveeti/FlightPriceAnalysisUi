@@ -9,6 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { DataDialogComponentComponent } from './data-dialog-component/data-dialog-component.component';
 import { ErroDialogComponent } from './erro-dialog/erro-dialog.component';
+import { CacheEntry } from './CacheEntry';
 
 
 
@@ -29,6 +30,7 @@ import { ErroDialogComponent } from './erro-dialog/erro-dialog.component';
 export class AppComponent {
   title = 'FlightPriceAnalysisUi';
   data:any;
+  cache:any;
   error:any;
   apiResultSource: string = ''; // Variable to store the API result for source
   apiResultDestination: string = ''; // Variable to store the API result for destination
@@ -39,7 +41,8 @@ export class AppComponent {
     destination:'',
     noofpersons: 0,
     date: Date,
-    classtype:''
+    classtype:'',
+    webcrawl:true,
 
   }
  
@@ -47,9 +50,9 @@ export class AppComponent {
   constructor(private http: HttpClient, public dialog: MatDialog) 
  
 { }
-  wordcheck()
+  wordcheck(wordcheckval2:any)
   {
-    const wordcheckval2 = this.flightDetailsEntered.source;
+    
  
     this.http.get('http://localhost:8080/api/wordcheck/'+wordcheckval2).pipe(
       map(data => {
@@ -73,9 +76,16 @@ export class AppComponent {
     // For example:
     this.http.post('http://localhost:8080/api/submissionform/submit', this.flightDetailsEntered).pipe(
       
-      map(data => {
-        this.data=data;
-        console.log(data);
+      map((data:any)=> {
+
+        const cacheEntry = new CacheEntry(data.fromCache, data.response);
+
+      // Handle the next value (data)
+      //console.log('Next:', cacheEntry);
+        this.cache=data.fromCache;
+        this.data=JSON.parse(data.response.body);
+        console.log(typeof(data.response.body));
+        console.log((data.response.body));
         this.openDialog();
        // return data;
      }),
@@ -106,7 +116,8 @@ export class AppComponent {
     this.dialog.open(DataDialogComponentComponent, {
       width: '50%',
       height: '50%',
-      data: { data: this.data }
+      data: { data: this.data,
+      cache: this.cache },
     });
     
   }

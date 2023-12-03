@@ -1,25 +1,24 @@
+<h2 mat-dialog-title class="dialog-title">The Cheapest Flight Price from Each Website</h2>
 
+<div *ngIf="cache">
+<h2 mat-dialog-title class="dialog-title">The Data is from cache</h2>
 
+<h2 mat-dialog-title class="dialog-title">Do you want to enable web crawl with same data?</h2>
 
-<h2 mat-dialog-title>The chepeast flight price from each website</h2>
+</div>
+<mat-table [dataSource]="dataSource" class="mat-table">
+  <ng-container matColumnDef="website">
+    <mat-header-cell *matHeaderCellDef class="table-header">Website</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="table-cell">{{ element.website }}</mat-cell>
+  </ng-container>
 
+  <ng-container matColumnDef="price">
+    <mat-header-cell *matHeaderCellDef class="table-header">Price</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="table-cell">{{ element.price }}</mat-cell>
+  </ng-container>
 
- <mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="website">
-      <mat-header-cell *matHeaderCellDef> Website </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.website}} </mat-cell>
-    </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
 
-    <ng-container matColumnDef="price">
-      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
- </mat-table>
-
- <button mat-raised-button color="warn" (click)="onNoClick()">Close</button>
-
-
-   
+<button mat-raised-button color="warn" class="close-button" (click)="onNoClick()">Close</button>

@@ -15,7 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class DataDialogComponentComponent {
   displayedColumns: string[] = ['website', 'price'];
   dataSource = new MatTableDataSource([]);
-
+cache:any;
 
 
  constructor(
@@ -23,6 +23,8 @@ export class DataDialogComponentComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
  ) {
     this.dataSource.data = data.data;
+    this.cache=data.cache;
+    
     
  }
 

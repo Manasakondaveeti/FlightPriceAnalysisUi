@@ -1,28 +1,28 @@
+<!-- Your Angular component template -->
 <div class="container">
     <h1 class="form-title">Please Enter Flight Details</h1>
-    <form #form="ngForm" class="flight-form">
+    <form #form="ngForm" class="flight-form" (load)="flightDetailsEntered.webcrawl=false;">
       <div class="input-field">
         <label for="from">From</label>
         <div class="input-group">
           <input type="text" id="from" name="from" [(ngModel)]="flightDetailsEntered.source" (ngModelChange)="onInputChange()" required>
           <button (click)="wordcheck(flightDetailsEntered.source)" class="spell-check-btn">Spell Check</button>
-          
         </div>
-        <div *ngIf="apiResultSource">
-            <p>Suggestions :{{ apiResultSource }}</p>
+        <div *ngIf="apiResultSource" class="suggestions">
+          <p>Suggestions: {{ apiResultSource }}</p>
         </div>
       </div>
   
       <div class="input-field">
         <label for="destination">Destination</label>
         <div class="input-group">
-        <input type="text" id="destination" name="destination" [(ngModel)]="flightDetailsEntered.destination" (ngModelChange)="onInputChange()" required>
-        <button (click)="wordcheck(flightDetailsEntered.destination)" class="spell-check-btn">Spell Check</button>
-          </div>
-        <div *ngIf="apiResultDestination">
-            <p>Suggestions: {{ apiResultDestination }}</p>
-        </div> 
-    </div>
+          <input type="text" id="destination" name="destination" [(ngModel)]="flightDetailsEntered.destination" (ngModelChange)="onInputChange()" required>
+          <button (click)="wordcheck(flightDetailsEntered.destination)" class="spell-check-btn">Spell Check</button>
+        </div>
+        <div *ngIf="apiResultDestination" class="suggestions">
+          <p>Suggestions: {{ apiResultDestination }}</p>
+        </div>
+      </div>
   
       <div class="input-field">
         <label for="noofpersons">No of Persons</label>
@@ -32,20 +32,17 @@
       <div class="input-field">
         <label for="date">Date</label>
         <input type="date" id="date" name="date" [(ngModel)]="flightDetailsEntered.date" required>
-
-        
       </div>
   
       <div class="input-field">
         <label for="classtype">Economy or Premium Economy</label>
         <input type="text" id="classtype" name="classtype" [(ngModel)]="flightDetailsEntered.classtype" required>
       </div>
-
-      <!-- Your Angular component template -->
-<div *ngIf="cache">
-    <label>
-    <input type="checkbox" [(ngModel)]="flightDetailsEntered.webcrawl" /> Web Crawl
-    </label>
+  
+      <!-- Update the HTML for the checkbox -->
+<div *ngIf="cache" class="input-field">
+    <label for="webcrawl" style="display: inline-block; margin-right: 10px;">Webcrawl include</label>
+    <input type="checkbox" id="webcrawl" name="webcrawl" [(ngModel)]="flightDetailsEntered.webcrawl" required>
   </div>
   
   

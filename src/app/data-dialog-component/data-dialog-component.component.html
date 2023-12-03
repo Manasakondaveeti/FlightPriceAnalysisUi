@@ -1,9 +1,7 @@
 <h2 mat-dialog-title class="dialog-title">The Cheapest Flight Price from Each Website</h2>
 
 <div *ngIf="cache">
-<h2 mat-dialog-title class="dialog-title">The Data is from cache</h2>
-
-<h2 mat-dialog-title class="dialog-title">Do you want to enable web crawl with same data?</h2>
+<h4 mat-dialog-title class="dialog-title">The Data retrieved is from cache.Do you want to enable web crawl with same data? if yes enable webcrawl checkbox and resubmit form</h4>
 
 </div>
 <mat-table [dataSource]="dataSource" class="mat-table">

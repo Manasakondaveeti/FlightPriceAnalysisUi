@@ -75,3 +75,12 @@ button {
 button:hover {
   background-color: #27ae60;
 }
+
+
+/* Add this CSS to your component's style file (e.g., styles.css or your.component.css) */
+
+/* Style for the checkbox label */
+.input-field label {
+  display: block;
+  margin-bottom: 8px;
+}

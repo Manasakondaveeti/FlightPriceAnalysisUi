@@ -30,6 +30,8 @@ export class AppComponent {
   title = 'FlightPriceAnalysisUi';
   data:any;
   error:any;
+  apiResultSource: string = ''; // Variable to store the API result for source
+  apiResultDestination: string = ''; // Variable to store the API result for destination
 
   flightDetailsEntered=
   {
@@ -54,7 +56,14 @@ export class AppComponent {
          console.log('data: ', data);
          alert("did you mean "+data);
          return data;
-      })
+      }),
+      catchError(errResp=>
+       {this.error=errResp.error;
+         console.log(this.error);
+         this.openErrorDialog(this.error);
+         return this.error;
+       }
+     ),
      ).subscribe();
   }
 
@@ -101,6 +110,42 @@ export class AppComponent {
     });
     
   }
+
+
+  onInputChange() {
+    const sourceInput = this.flightDetailsEntered.source.trim();
+    const destinationInput = this.flightDetailsEntered.destination.trim();
+   
+    // Handle logic when input values change
+    console.log('Input values changed:', this.flightDetailsEntered.source.trim());
+    if (this.flightDetailsEntered.source.trim() !== '') {
+      const apiUrsource = 'http://localhost:8080/api/wordCompletion/' + this.flightDetailsEntered.source.trim();
+      console.log('API URL:', apiUrsource);
+      this.http.get(apiUrsource).pipe(
+          map(data => {
+              console.log('data: ', data);
+              this.apiResultSource = data as string;
+              return data;
+          })
+      ).subscribe();
+    }else{
+      this.apiResultSource = "";
+    }
+    if (this.flightDetailsEntered.destination.trim() !== '') {
+      const apiUrlDestination = 'http://localhost:8080/api/wordCompletion/' + this.flightDetailsEntered.destination.trim();
+      console.log('API URL:', apiUrlDestination);
+      this.http.get(apiUrlDestination).pipe(
+          map(data => {
+              console.log('data: ', data);
+              this.apiResultDestination = data as string;
+              return data;
+          })
+      ).subscribe();
+    }else{
+      this.apiResultDestination = "";
+    }
+   
+}
 }
 
 

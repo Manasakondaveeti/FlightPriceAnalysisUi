@@ -1,31 +1,44 @@
-
-    <div class="container">
-        <h1>Please enter details of flight</h1>
-        <form  #form="ngForm">
-            <div class="input-field">
-                <label for="from">From</label>
-                <input type="text" id="from" name="from"  [(ngModel)]="flightDetailsEntered.source" required>
-                <button (click)="wordcheck()">spell check</button>
-            </div>
-            <div class="input-field">
-              <label for="destination">Destination</label>
-              <input type="text" id="destination" name="destination" [(ngModel)]="flightDetailsEntered.destination" required>
-          </div>
-          <div class="input-field">
-            <label for="noofpersons">No of persons</label>
-            <input type="number" id="noofpersons" name="noofpersons" [(ngModel)]="flightDetailsEntered.noofpersons" required>
+<div class="container">
+    <h1 class="form-title">Please Enter Flight Details</h1>
+    <form #form="ngForm" class="flight-form">
+      <div class="input-field">
+        <label for="from">From</label>
+        <div class="input-group">
+          <input type="text" id="from" name="from" [(ngModel)]="flightDetailsEntered.source" (ngModelChange)="onInputChange()" required>
+          <button (click)="wordcheck()" class="spell-check-btn">Spell Check</button>
+          
         </div>
-            <div class="input-field">
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" [(ngModel)]="flightDetailsEntered.date" required>
-            </div>
-            <div class="input-field">
-              <label for="type">Economy or Premium economy</label>
-              <input type="text" id="type" name="classtype" [(ngModel)]="flightDetailsEntered.classtype" required>
-          </div>
-         
-          <div class="submit-btn">
-                <input type="submit" (click)="onSubmit(form);" value="Submit Form">
-            </div>
-        </form>
+        <div *ngIf="apiResultSource">
+            <p>Suggestions :{{ apiResultSource }}</p>
+        </div>
+      </div>
+  
+      <div class="input-field">
+        <label for="destination">Destination</label>
+        <input type="text" id="destination" name="destination" [(ngModel)]="flightDetailsEntered.destination" (ngModelChange)="onInputChange()" required>
+        <div *ngIf="apiResultDestination">
+            <p>Suggestions: {{ apiResultDestination }}</p>
+        </div> 
     </div>
+  
+      <div class="input-field">
+        <label for="noofpersons">No of Persons</label>
+        <input type="number" id="noofpersons" name="noofpersons" [(ngModel)]="flightDetailsEntered.noofpersons" required>
+      </div>
+  
+      <div class="input-field">
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" [(ngModel)]="flightDetailsEntered.date" required>
+      </div>
+  
+      <div class="input-field">
+        <label for="classtype">Economy or Premium Economy</label>
+        <input type="text" id="classtype" name="classtype" [(ngModel)]="flightDetailsEntered.classtype" required>
+      </div>
+  
+      <div class="submit-btn">
+        <button type="submit" (click)="onSubmit(form)">Submit Form</button>
+      </div>
+    </form>
+  </div>
+  

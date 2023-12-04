@@ -45,10 +45,7 @@ export class AppComponent {
     webcrawl:false,
 
   }
-  ngOnInit(): void {
-    this.flightDetailsEntered.webcrawl=false;
-  }
-
+ 
   constructor(private http: HttpClient, public dialog: MatDialog) 
  
 { }
@@ -85,6 +82,9 @@ export class AppComponent {
       // Handle the next value (data)
       //console.log('Next:', cacheEntry);
         this.cache=data.fromCache;
+        console.log((this.cache));
+        if(!this.cache)this.flightDetailsEntered.webcrawl=false;
+        
         this.data=JSON.parse(data.response.body);
         console.log(typeof(data.response.body));
         console.log((data.response.body));
